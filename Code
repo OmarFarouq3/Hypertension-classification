@@ -1,0 +1,1582 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center>\n",
+    "  <h2 style=\"color: #f0f0f0; font-family: 'Trebuchet MS', sans-serif;\">GamaLearn Internship Admission Project</h2>\n",
+    "  <h3 style=\"color: #dcdcdc; font-family: Arial, sans-serif; margin-top: -10px;\">Omar Mohammad Farouq Abdelsalam</h3>\n",
+    "  <p style=\"color: #bbbbbb; font-family: Arial, sans-serif; font-size: 14px; margin-top: -10px;\">\n",
+    "     Data Science & Machine Learning Project | March 2025\n",
+    "  </p>\n",
+    "  <br>\n",
+    "  <div style=\"background: #f5f5f5; padding: 10px; display: inline-block; border-radius: 8px;\">\n",
+    "    <img src=\"Gamalearn.png\" alt=\"GamaLearn logo\" width=\"200px\">\n",
+    "  </div>\n",
+    "</center>\n",
+    "<hr style=\"border: 1px solid #666; width: 90%;\">\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<details open>\n",
+    "  <summary><u><strong>Contents</strong></u></summary>\n",
+    "  <br>\n",
+    "  <ul>\n",
+    "    <li><a href=\"#problem-statement\"><font size=4>1.0 Problem Statement: Medical Hypertension Study</font></a>\n",
+    "      <ul>\n",
+    "        <li><a href=\"#introduction\"><font size=4>1.1 Introduction</font></a></li>\n",
+    "        <li><a href=\"#objective\"><font size=4>1.2 Objective</font></a></li>\n",
+    "        <li><a href=\"#algorithms\"><font size=4>1.3 Algorithms</font></a></li>\n",
+    "      </ul>\n",
+    "    </li>\n",
+    "    <li><a href=\"#related-works\"><font size=4>2.0 Related Works</font></a></li>\n",
+    "    <li><a href=\"#preprocessing\"><font size=4>3.0 Data Exploration & Preprocessing</font></a>\n",
+    "      <ul>\n",
+    "        <li><a href=\"#data-loading\"><font size=4>3.1 Data Loading</font></a></li>\n",
+    "        <li><a href=\"#feature-understanding\"><font size=4>3.2 Feature Understanding</font></a></li>\n",
+    "        <li><a href=\"#data-cleaning\"><font size=4>3.3 Data Cleaning</font></a></li>\n",
+    "        <li><a href=\"#eda\"><font size=4>3.4 Exploratory Data Analysis (EDA)</font></a></li>\n",
+    "        <li><a href=\"#feature-engineering\"><font size=4>3.5 Feature Engineering & Scaling</font></a></li>\n",
+    "      </ul>\n",
+    "    </li>\n",
+    "    <li><a href=\"#model-building\"><font size=4>4.0 Model Building</font></a>\n",
+    "      <ul>\n",
+    "        <li><a href=\"#train-test-split\"><font size=4>4.1 Train-Test Split</font></a></li>\n",
+    "        <li><a href=\"#baseline-model\"><font size=4>4.2 Baseline Model</font></a></li>\n",
+    "        <li><a href=\"#classifier-training\"><font size=4>4.3 Multiple Classifiers Training</font></a></li>\n",
+    "      </ul>\n",
+    "    </li>\n",
+    "    <li><a href=\"#model-evaluation\"><font size=4>5.0 Model Evaluation</font></a>\n",
+    "      <ul>\n",
+    "        <li><a href=\"#evaluation-metrics\"><font size=4>5.1 Evaluation Metrics</font></a></li>\n",
+    "        <li><a href=\"#confusion-matrices\"><font size=4>5.2 Confusion Matrices</font></a></li>\n",
+    "        <li><a href=\"#models-comparison\"><font size=4>5.3 Models Comparison</font></a></li>\n",
+    "        <li><a href=\"#visualizations\"><font size=4>5.4 Visualizations</font></a></li>\n",
+    "      </ul>\n",
+    "    </li>\n",
+    "    <li><a href=\"#conclusion\"><font size=4>6.0 Conclusion</font></a></li>\n",
+    "    <li><a href=\"#github-repo\"><font size=4>7.0 GitHub Repository (Optional)</font></a></li>\n",
+    "  </ul>\n",
+    "</details>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center>  <h2>   1.0 Problem Statement: Medical Hypertension Study </h2>  </center>\n",
+    "<a id=\"problem-statement\"></a>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">1.1 Introduction</h3>\n",
+    "</center>\n",
+    "\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #f0f0f0; font-size: 15px;\">\n",
+    "\n",
+    "\n",
+    "<a id=\"introduction\"></a>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "\n",
+    "<!-- Body Content -->\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Hypertension, or high blood pressure, is one of the most prevalent forms of cardiovascular disease in the world. Hypertension arises when blood is pumped through arteries at a higher rate than normal blood pressure, generating long-term effects and issues related to health, such as heart disease, strokes, kidney failure, and more. Hypertension is estimated to cause about 7.5 million deaths globally each year, representing about 12.8% of all deaths, as diagnosed by the World Health Organization (WHO).\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Detecting hypertension sooner is vital. It creates opportunities for early interventions and prevents the gradual decline of chronic health. Being a supposedly symptomless progressive disease, many individuals remain unaware they are hypertensive and unaware of permanent damage until it is too late to intervene and prevent more serious diseases.\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Predicting hypertension allows for healthcare providers to make the best evidence-based decisions, provide and undertake early interventions, and help improve health outcomes. Analysis of medical data utilizing machine learning abilities can help gather hidden patterns and discover complex relationships to improve and provide as many effective healthcare prevention and treatment strategies as possible.\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "This project will use the given hypertension dataset to demonstrate various machine learning modalities through data analysis, data visualization, model development, and an algorithmic evaluation of the created model utilizing classifiers.\n",
+    "</p>\n",
+    "\n",
+    "<!-- Anchor for navigation (if needed) -->\n",
+    "<a id=\"introduction\"></a>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">1.2 Objectives</h3>\n",
+    "</center>\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #f0f0f0; font-size: 15px;\">\n",
+    "\n",
+    "<a id=\"objective\"></a>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "\n",
+    "<!-- Body Content -->\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "The essential goal of this project is to develop and complete the classification of individuals as Positive (Hypertensive) or Negative (Non-Hypertensive) by forming models that use clinical and demographic features from the dataset. More specifically, the project will accomplish the following tasks:\n",
+    "</p>\n",
+    "\n",
+    "<!-- Numbered List -->\n",
+    "<ol style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.8;\">\n",
+    "  <li>Examine through data analysis and visualization techniques and understand the hypertension dataset.</li>\n",
+    "  <li>The data will be preprocessed for machine learning models such as handling missing values, feature scaling and the data splitting.</li>\n",
+    "  <li>Use the best algorithms suitable for the binary classification task. They can be, for example, Support Vector Machine (SVM), K-Nearest Neighbors (KNN), Random Forest and others.</li>\n",
+    "  <li>Determine how well the models perform using evaluation metrics such as accuracy, precision, recall, F1-Score, and confusion matrices.</li>\n",
+    "  <li> Demonstrating the performance of these models through the visualization of confusion matrices and ROC curves and performing other relevant performance comparisons…</li>\n",
+    "  <li>Derive findings and insights from the analysis to identify the model that predicts hypertension most accurately.</li>\n",
+    "</ol>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<!-- Section Title -->\n",
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">1.3 Algorithms </h3>\n",
+    "</center>\n",
+    "\n",
+    "<!-- Divider -->\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n",
+    "\n",
+    "<!-- Body Content -->\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "To deal with the binary classification problem of predicting hypertensive (Positive) versus non-hypertensive (Negative) individuals, this project will use several machine learning algorithms. Each of these algorithms has been picked as they have proved to classify well, specifically in medical datasets.\n",
+    "</p>\n",
+    "\n",
+    "<!-- Bullet List -->\n",
+    "<ul style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.8;\">\n",
+    "  <li><strong>Support Vector Machine (SVM)</strong>: Can cope excellently with high-dimensional data and is suitable for dealing with both linear and nonlinear relationships, whose shapes can be changed by different kernels (e.g., RBF).</li>\n",
+    "  <li><strong>K-Nearest Neighbors (KNN)</strong>:  A simplistic but lazy learning algorithm that makes predictions based on the nearness of data points in the feature space.</li>\n",
+    "  <li><strong>Random Forest</strong>: An ensemble method that runs multiple decision trees and puts together their outputs for better and more accurate classification results. Additionally, it presents a distribution of the feature importance.</li>\n",
+    "  <li><strong>Logistic Regression</strong>: A flexible linear model that is widely used in the area of binary classification, its advantage is interpretability, and this is a benchmark model among others.</li>\n",
+    "  <li><strong>Naive Bayes</strong>: Is a classification algorithm that is probabilistic. It makes a naive assumption that the features are all independent of each other given a class label (hence, \"naive\"). The particular functionality of it is especially significant for data predictive outcomes where the number of attributes per sample is very high and also when smaller training data is used it becomes faster, which is a major need in many cases.</li>\n",
+    "</ul>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "These models will be tested and contrasted to decide which one is the best performer for hypertension prediction in the provided dataset.</p>\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<!-- Subsection Title -->\n",
+    "<center> \n",
+    "  <h4 style=\"color: #87cefa; font-family: 'Trebuchet MS', sans-serif;\">1.3.1 Why These Algorithms for Hypertension?</h4>\n",
+    "</center>\n",
+    "\n",
+    "<!-- Subsection Divider (thinner or shorter) -->\n",
+    "<hr style=\"border: 0.8px solid #87cefa; width: 30%;\">\n",
+    "\n",
+    "<!-- Body Content -->\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 13.5px; line-height: 1.6;\">\n",
+    "This project of hypertension prediction is the basis of analyzing clinical factors such as age, resting blood pressure, cholesterol levels, electrocardiographic results, heart rate responses, and angiographic results. These characteristics give a detailed description of clinical events that help to evaluate the risk of hypertensive or cardiovascular diseases. Here is the reason for the chosen algorithm being fit for the problem:\n",
+    "\n",
+    "</p>\n",
+    "\n",
+    "<ul style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 13.5px; line-height: 1.8;\">\n",
+    "<li><strong>Support Vector Machine (SVM)</strong>:  Data for hypertension can be so complicated by the decision lines where the risk factors such as age, cholesterol, resting blood pressure, and ECG results that the patients may not be separated linearly as hypertensive from non-hypertensive. SVM, in particular, with the RBF kernel, excellently captures these nonlinear separations not only in terms of model performance but also is well-suited for high-dimensional clinical datasets often used in healthcare.</li>\n",
+    "\n",
+    "  <li><strong>K-Nearest Neighbors (KNN)</strong>:  In the medical data, patients often share the same diagnoses. KNN makes aviation to this field by locating patients in a similarity which is to be close to known cases (neighbors) in the feature space. It is interesting in finding out the small regions of the clusters that denote hypertension hazard due to the behavior.</li>\n",
+    "\n",
+    "<li><strong>Random Forest</strong>:  Hypertension can be affected by many symptoms that act together to harm the body. Random Forest is good because it can help model non-linear relationships, remove outliers, and thus, automatically rank the importance of features. This aids healthcare providers in pinpointing the most predictive factors, such as the levels of cholesterol, the patients' blood pressure at rest, or the maximum heart rate they can attain.</li>\n",
+    "\n",
+    "  <li><strong>Logistic Regression</strong>: Logistic Regression provides a clear and interpretable model, making it useful when transparency is crucial for medical decisions. Its coefficients directly show how each feature affects the probability of hypertension, which is essential for practitioners who need to understand the model’s rationale.</li>\n",
+    "\n",
+    "  <li><strong>Naive Bayes</strong>: The main reason for the Naive Bayes choice was the simplicity, speed, and effectiveness of the high-dimensional sets. Despite its basic assumption of feature independence, it is often the case that it works very well in problems such as classification in medicine. The Naive Bayes is a simple and interpretable model, which is beside the more complex classifiers such as Random Forest and SVM.</li>\n",
+    "</ul>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 13.5px; line-height: 1.6;\">\n",
+    "These algorithms will be effective in capturing all types of relationships present in this dataset, since the dataset is medical so we can expect a more complex nature, involving a lot of relationships.\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 13.5px; line-height: 1.6;\">\n",
+    "By applying these algorithms, the project aims to balance interpretability (e.g., Logistic Regression, Random Forest) with predictive power (e.g., SVM) to find the most effective model for hypertension classification.\n",
+    "</p>\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center>  <h2>   2.0 Related Works </h2>  </center>\n",
+    "\n",
+    "<!-- Section Title -->\n",
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">2.1 Short Literature Review </h3>\n",
+    "</center>\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Modern techniques in machine learning have greatly accelerated early prediction and classification of hypertension with the application of clinical and lifestyle datasets. Jayakumar et al., in one such study, made a comparison of the performances of different machine learning models such as Decision Trees, Naive Bayes, Random Forest, and SVM. Random Forest was consistently the best with accuracies greater than 90% in multiple clinical datasets **[1]**. Their work pointed to the power of ensemble learning in capturing the complex relationships existing in health data.\n",
+    "\n",
+    "A closely related review by Adawiyah et al. described the performance of several traditional ML classifiers for predicting hypertension, and it noted that K-Nearest Neighbors (KNN) seemed to have the highest accuracy but was quite sensitive to data imbalance, thus resulting in overfitting tendencies **[2]**. This fit almost perfectly with the present work, where KNN gave almost perfect predictions that warranted more investigation by way of cross-validation to ascertain reliability.\n",
+    "\n",
+    "Khan and Anwar undertook a case study in the application of Random Forest, XGBoost, and SVM on local population datasets with hyperparameter tuning aimed at optimizing the result **[3]**. XGBoost was thus said to have the best F1-score (92.4%), affirming its relevance in the medical classification of nonlinear patterns and complex features. This reinforces the choice of XGBoost in the contrasting models of this study.\n",
+    "\n",
+    "In extension, Hasan et al. considered early-hypertension prediction using EHRs and lifestyle features, comparing Logistic Regression, Gradient Boosting, and neural networks **[4]**. It was found that Gradient Boosting had performed quite well in maintaining a strong recall and precision trade-off, which is most desirable when both false-positive and false-negative predictions come at a premium cost. This makes Gradient Boosting relevant in healthcare settings where actionable predictive information is required.\n",
+    "\n",
+    "Lastly, Chauhan and Patel highlighted the problem of dataset imbalance in hypertension classification and addressed it using SMOTE combined with Random Forest and XGBoost **[5]**. Their work revealed impressive improvements in recall upon equalizing class distributions, especially in minority (hypertensive) case detection. This increases awareness regarding class imbalances in real-life datasets and proposes that with even better imputation techniques applied, the results of this project can be made better in subsequent editions.\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<hr>\n",
+    "<h3>References</h3>\n",
+    "\n",
+    "<p><strong>[1]</strong> Jayakumar, N., Revathi, R., & Prabhavathy, P. R. (2020). A survey of machine learning approaches for hypertension risk prediction. *Procedia Computer Science*, 171, 1985–1994.</p>\n",
+    "\n",
+    "<p><strong>[2]</strong> Adawiyah, R., Rezkita, R., & Primartha, R. (2021). Predicting hypertension using machine learning: A review. *IEEE Access*, 9, 114301–114312.</p>\n",
+    "\n",
+    "<p><strong>[3]</strong> Khan, R., & Anwar, S. (2022). Machine learning models for hypertension risk prediction: A case study. *BioMed Research International*, 2022, Article ID 6808512.</p>\n",
+    "\n",
+    "<p><strong>[4]</strong> Hasan, M. K., Al Mamun, M. A., & Ahmed, M. U. (2023). Early detection of hypertension using machine learning techniques. *Computers in Biology and Medicine*, 152, 106308.</p>\n",
+    "\n",
+    "<p><strong>[5]</strong> Chauhan, A., & Patel, N. (2022). Application of ML algorithms in predicting hypertension with imbalanced datasets. *arXiv preprint arXiv:2205.01138*.</p>\n",
+    "\n",
+    "\n",
+    "\n",
+    "<hr>\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center><h2>3.0 Data Exploration & Preprocessing</h2></center>\n",
+    "<a id=\"preprocessing\"></a>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">3.1 Data Loading </h3>\n",
+    "</center>\n",
+    "\n",
+    "<!-- Divider -->\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n",
+    "\n",
+    "Importing libraries and dataset.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "FileNotFoundError",
+     "evalue": "[Errno 2] No such file or directory: 'hypertension_data 2 (1).csv'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[31m---------------------------------------------------------------------------\u001b[39m",
+      "\u001b[31mFileNotFoundError\u001b[39m                         Traceback (most recent call last)",
+      "\u001b[36mCell\u001b[39m\u001b[36m \u001b[39m\u001b[32mIn[1]\u001b[39m\u001b[32m, line 31\u001b[39m\n\u001b[32m     27\u001b[39m \u001b[38;5;28;01mimport\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[34;01mplotly\u001b[39;00m\u001b[34;01m.\u001b[39;00m\u001b[34;01mexpress\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[38;5;28;01mas\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[34;01mpx\u001b[39;00m                \u001b[38;5;66;03m# For simple, expressive plotting\u001b[39;00m\n\u001b[32m     28\u001b[39m \u001b[38;5;28;01mimport\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[34;01mseaborn\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[38;5;28;01mas\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[34;01msns\u001b[39;00m                      \u001b[38;5;66;03m# Another plotting library\u001b[39;00m\n\u001b[32m---> \u001b[39m\u001b[32m31\u001b[39m df = \u001b[43mpd\u001b[49m\u001b[43m.\u001b[49m\u001b[43mread_csv\u001b[49m\u001b[43m(\u001b[49m\u001b[33;43m'\u001b[39;49m\u001b[33;43mhypertension_data 2 (1).csv\u001b[39;49m\u001b[33;43m'\u001b[39;49m\u001b[43m)\u001b[49m\n\u001b[32m     32\u001b[39m df.head(\u001b[32m5\u001b[39m)\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mc:\\Users\\ASUS\\anaconda3\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py:1026\u001b[39m, in \u001b[36mread_csv\u001b[39m\u001b[34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)\u001b[39m\n\u001b[32m   1013\u001b[39m kwds_defaults = _refine_defaults_read(\n\u001b[32m   1014\u001b[39m     dialect,\n\u001b[32m   1015\u001b[39m     delimiter,\n\u001b[32m   (...)\u001b[39m\u001b[32m   1022\u001b[39m     dtype_backend=dtype_backend,\n\u001b[32m   1023\u001b[39m )\n\u001b[32m   1024\u001b[39m kwds.update(kwds_defaults)\n\u001b[32m-> \u001b[39m\u001b[32m1026\u001b[39m \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[43m_read\u001b[49m\u001b[43m(\u001b[49m\u001b[43mfilepath_or_buffer\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mkwds\u001b[49m\u001b[43m)\u001b[49m\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mc:\\Users\\ASUS\\anaconda3\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py:620\u001b[39m, in \u001b[36m_read\u001b[39m\u001b[34m(filepath_or_buffer, kwds)\u001b[39m\n\u001b[32m    617\u001b[39m _validate_names(kwds.get(\u001b[33m\"\u001b[39m\u001b[33mnames\u001b[39m\u001b[33m\"\u001b[39m, \u001b[38;5;28;01mNone\u001b[39;00m))\n\u001b[32m    619\u001b[39m \u001b[38;5;66;03m# Create the parser.\u001b[39;00m\n\u001b[32m--> \u001b[39m\u001b[32m620\u001b[39m parser = \u001b[43mTextFileReader\u001b[49m\u001b[43m(\u001b[49m\u001b[43mfilepath_or_buffer\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43m*\u001b[49m\u001b[43m*\u001b[49m\u001b[43mkwds\u001b[49m\u001b[43m)\u001b[49m\n\u001b[32m    622\u001b[39m \u001b[38;5;28;01mif\u001b[39;00m chunksize \u001b[38;5;129;01mor\u001b[39;00m iterator:\n\u001b[32m    623\u001b[39m     \u001b[38;5;28;01mreturn\u001b[39;00m parser\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mc:\\Users\\ASUS\\anaconda3\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py:1620\u001b[39m, in \u001b[36mTextFileReader.__init__\u001b[39m\u001b[34m(self, f, engine, **kwds)\u001b[39m\n\u001b[32m   1617\u001b[39m     \u001b[38;5;28mself\u001b[39m.options[\u001b[33m\"\u001b[39m\u001b[33mhas_index_names\u001b[39m\u001b[33m\"\u001b[39m] = kwds[\u001b[33m\"\u001b[39m\u001b[33mhas_index_names\u001b[39m\u001b[33m\"\u001b[39m]\n\u001b[32m   1619\u001b[39m \u001b[38;5;28mself\u001b[39m.handles: IOHandles | \u001b[38;5;28;01mNone\u001b[39;00m = \u001b[38;5;28;01mNone\u001b[39;00m\n\u001b[32m-> \u001b[39m\u001b[32m1620\u001b[39m \u001b[38;5;28mself\u001b[39m._engine = \u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43m_make_engine\u001b[49m\u001b[43m(\u001b[49m\u001b[43mf\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43mengine\u001b[49m\u001b[43m)\u001b[49m\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mc:\\Users\\ASUS\\anaconda3\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py:1880\u001b[39m, in \u001b[36mTextFileReader._make_engine\u001b[39m\u001b[34m(self, f, engine)\u001b[39m\n\u001b[32m   1878\u001b[39m     \u001b[38;5;28;01mif\u001b[39;00m \u001b[33m\"\u001b[39m\u001b[33mb\u001b[39m\u001b[33m\"\u001b[39m \u001b[38;5;129;01mnot\u001b[39;00m \u001b[38;5;129;01min\u001b[39;00m mode:\n\u001b[32m   1879\u001b[39m         mode += \u001b[33m\"\u001b[39m\u001b[33mb\u001b[39m\u001b[33m\"\u001b[39m\n\u001b[32m-> \u001b[39m\u001b[32m1880\u001b[39m \u001b[38;5;28mself\u001b[39m.handles = \u001b[43mget_handle\u001b[49m\u001b[43m(\u001b[49m\n\u001b[32m   1881\u001b[39m \u001b[43m    \u001b[49m\u001b[43mf\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1882\u001b[39m \u001b[43m    \u001b[49m\u001b[43mmode\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1883\u001b[39m \u001b[43m    \u001b[49m\u001b[43mencoding\u001b[49m\u001b[43m=\u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43moptions\u001b[49m\u001b[43m.\u001b[49m\u001b[43mget\u001b[49m\u001b[43m(\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mencoding\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;28;43;01mNone\u001b[39;49;00m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1884\u001b[39m \u001b[43m    \u001b[49m\u001b[43mcompression\u001b[49m\u001b[43m=\u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43moptions\u001b[49m\u001b[43m.\u001b[49m\u001b[43mget\u001b[49m\u001b[43m(\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mcompression\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;28;43;01mNone\u001b[39;49;00m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1885\u001b[39m \u001b[43m    \u001b[49m\u001b[43mmemory_map\u001b[49m\u001b[43m=\u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43moptions\u001b[49m\u001b[43m.\u001b[49m\u001b[43mget\u001b[49m\u001b[43m(\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mmemory_map\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;28;43;01mFalse\u001b[39;49;00m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1886\u001b[39m \u001b[43m    \u001b[49m\u001b[43mis_text\u001b[49m\u001b[43m=\u001b[49m\u001b[43mis_text\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1887\u001b[39m \u001b[43m    \u001b[49m\u001b[43merrors\u001b[49m\u001b[43m=\u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43moptions\u001b[49m\u001b[43m.\u001b[49m\u001b[43mget\u001b[49m\u001b[43m(\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mencoding_errors\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mstrict\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1888\u001b[39m \u001b[43m    \u001b[49m\u001b[43mstorage_options\u001b[49m\u001b[43m=\u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43moptions\u001b[49m\u001b[43m.\u001b[49m\u001b[43mget\u001b[49m\u001b[43m(\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mstorage_options\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;28;43;01mNone\u001b[39;49;00m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1889\u001b[39m \u001b[43m\u001b[49m\u001b[43m)\u001b[49m\n\u001b[32m   1890\u001b[39m \u001b[38;5;28;01massert\u001b[39;00m \u001b[38;5;28mself\u001b[39m.handles \u001b[38;5;129;01mis\u001b[39;00m \u001b[38;5;129;01mnot\u001b[39;00m \u001b[38;5;28;01mNone\u001b[39;00m\n\u001b[32m   1891\u001b[39m f = \u001b[38;5;28mself\u001b[39m.handles.handle\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mc:\\Users\\ASUS\\anaconda3\\Lib\\site-packages\\pandas\\io\\common.py:873\u001b[39m, in \u001b[36mget_handle\u001b[39m\u001b[34m(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)\u001b[39m\n\u001b[32m    868\u001b[39m \u001b[38;5;28;01melif\u001b[39;00m \u001b[38;5;28misinstance\u001b[39m(handle, \u001b[38;5;28mstr\u001b[39m):\n\u001b[32m    869\u001b[39m     \u001b[38;5;66;03m# Check whether the filename is to be opened in binary mode.\u001b[39;00m\n\u001b[32m    870\u001b[39m     \u001b[38;5;66;03m# Binary mode does not support 'encoding' and 'newline'.\u001b[39;00m\n\u001b[32m    871\u001b[39m     \u001b[38;5;28;01mif\u001b[39;00m ioargs.encoding \u001b[38;5;129;01mand\u001b[39;00m \u001b[33m\"\u001b[39m\u001b[33mb\u001b[39m\u001b[33m\"\u001b[39m \u001b[38;5;129;01mnot\u001b[39;00m \u001b[38;5;129;01min\u001b[39;00m ioargs.mode:\n\u001b[32m    872\u001b[39m         \u001b[38;5;66;03m# Encoding\u001b[39;00m\n\u001b[32m--> \u001b[39m\u001b[32m873\u001b[39m         handle = \u001b[38;5;28;43mopen\u001b[39;49m\u001b[43m(\u001b[49m\n\u001b[32m    874\u001b[39m \u001b[43m            \u001b[49m\u001b[43mhandle\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m    875\u001b[39m \u001b[43m            \u001b[49m\u001b[43mioargs\u001b[49m\u001b[43m.\u001b[49m\u001b[43mmode\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m    876\u001b[39m \u001b[43m            \u001b[49m\u001b[43mencoding\u001b[49m\u001b[43m=\u001b[49m\u001b[43mioargs\u001b[49m\u001b[43m.\u001b[49m\u001b[43mencoding\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m    877\u001b[39m \u001b[43m            \u001b[49m\u001b[43merrors\u001b[49m\u001b[43m=\u001b[49m\u001b[43merrors\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m    878\u001b[39m \u001b[43m            \u001b[49m\u001b[43mnewline\u001b[49m\u001b[43m=\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\n\u001b[32m    879\u001b[39m \u001b[43m        \u001b[49m\u001b[43m)\u001b[49m\n\u001b[32m    880\u001b[39m     \u001b[38;5;28;01melse\u001b[39;00m:\n\u001b[32m    881\u001b[39m         \u001b[38;5;66;03m# Binary mode\u001b[39;00m\n\u001b[32m    882\u001b[39m         handle = \u001b[38;5;28mopen\u001b[39m(handle, ioargs.mode)\n",
+      "\u001b[31mFileNotFoundError\u001b[39m: [Errno 2] No such file or directory: 'hypertension_data 2 (1).csv'"
+     ]
+    }
+   ],
+   "source": [
+    "# - Data Manipulation and Preprocessing\n",
+    "import pandas as pd                                           # For handling datasets and data manipulation\n",
+    "from sklearn.preprocessing import MinMaxScaler, LabelEncoder  # For scaling and encoding data\n",
+    "import numpy as np                                            # For manipulating numeric values\n",
+    "\n",
+    "# - Model Building\n",
+    "\n",
+    "# For splitting data and hyperparameter tuning\n",
+    "from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score    \n",
+    "\n",
+    "from sklearn.metrics import (\n",
+    "    accuracy_score,         # For evaluating model accuracy\n",
+    "    classification_report,  # For detailed classification metrics\n",
+    "    confusion_matrix,       # For confusion matrix calculation\n",
+    "    ConfusionMatrixDisplay, # For visualizing the confusion matrix\n",
+    "    roc_auc_score,          # For calculating ROC-AUC score\n",
+    "    roc_curve               # For generating ROC curve data\n",
+    ")\n",
+    "\n",
+    "# - Machine Learning Models\n",
+    "import xgboost as xgb                                # For XGBoost classifier\n",
+    "from sklearn.svm import SVC                          # For Support Vector Classifier (SVM)\n",
+    "from sklearn.ensemble import RandomForestClassifier  # For Random Forest Classifier\n",
+    "\n",
+    "# - Visualization\n",
+    "import matplotlib.pyplot as plt            # For plotting static visualizations\n",
+    "import plotly.express as px                # For simple, expressive plotting\n",
+    "import seaborn as sns                      # Another plotting library\n",
+    "\n",
+    "\n",
+    "df = pd.read_csv('hypertension_data 2 (1).csv')\n",
+    "df.head(5)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">3.2 Feature Understanding</h3>\n",
+    "</center>\n",
+    "\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "This dataset consists of clinical and diagnostic features that are commonly associated with hypertension or cardiovascular risks. Below is a description of each feature along with its potential relevance to hypertension prediction:\n",
+    "</p>\n",
+    "\n",
+    "<ul style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.8;\">\n",
+    "\n",
+    "  <li><strong>age</strong>: Age of the patient (in years). Increasing age is a well-known risk factor for hypertension and cardiovascular diseases.</li>\n",
+    "\n",
+    "  <li><strong>sex</strong>: Gender of the patient (1 = male, 0 = female). Males may have different risk profiles compared to females in certain age groups regarding hypertension.</li>\n",
+    "\n",
+    "  <li><strong>cp (chest pain type)</strong>: Type of chest pain experienced. Some types of chest pain (e.g., typical angina) may be related to cardiovascular issues, which can co-occur with hypertension.</li>\n",
+    "\n",
+    "  <li><strong>trestbps (resting blood pressure)</strong>: Blood pressure measured at rest (mm Hg). One of the most direct indicators of hypertension risk.</li>\n",
+    "\n",
+    "  <li><strong>chol (serum cholesterol)</strong>: Cholesterol level in mg/dl. Elevated cholesterol can contribute to arterial plaque buildup, increasing blood pressure and cardiovascular risk.</li>\n",
+    "\n",
+    "  <li><strong>fbs (fasting blood sugar > 120 mg/dl)</strong>: Indicates if fasting blood sugar is above normal levels (1 = True, 0 = False). Diabetes and elevated glucose levels are often comorbid with hypertension.</li>\n",
+    "\n",
+    "  <li><strong>restecg (resting electrocardiographic results)</strong>: Results from ECG at rest. Abnormalities here may indicate underlying heart conditions linked to hypertension.</li>\n",
+    "\n",
+    "  <li><strong>thalach (maximum heart rate achieved)</strong>: The highest heart rate recorded during exercise. Lower values might be associated with cardiac limitations related to hypertensive conditions.</li>\n",
+    "\n",
+    "  <li><strong>exang (exercise-induced angina)</strong>: Whether angina occurs during exercise (1 = Yes, 0 = No). Angina during exertion can signal heart stress that may be associated with hypertension.</li>\n",
+    "\n",
+    "  <li><strong>oldpeak (ST depression)</strong>: ST depression induced by exercise relative to rest. A clinical marker often used to assess ischemic heart disease risk, which can be related to hypertension.</li>\n",
+    "\n",
+    "  <li><strong>slope</strong>: The slope of the peak exercise ST segment. Variations can indicate cardiac abnormalities that may correlate with hypertension risk.</li>\n",
+    "\n",
+    "  <li><strong>ca</strong>: Number of major vessels (0–3) colored by fluoroscopy. More visible vessels may suggest less blockage, while fewer may indicate cardiovascular issues that can be worsened by hypertension.</li>\n",
+    "\n",
+    "  <li><strong>thal</strong>: Thalassemia-related test results (1 = normal; 2 = fixed defect; 3 = reversible defect). This can give further insight into the heart’s health and structural abnormalities.</li>\n",
+    "\n",
+    "  <li><strong>target</strong>: The class label (1 = hypertensive/positive, 0 = non-hypertensive/negative). This is the target variable for classification.</li>\n",
+    "\n",
+    "</ul>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Each feature provides clinical information that may contribute to the patient's likelihood of being hypertensive and will be used by the machine learning models for classification.\n",
+    "</p>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">3.3 Data Cleaning</h3>\n",
+    "</center>\n",
+    "\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n",
+    "\n",
+    "<a id=\"data-cleaning\"></a>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Dropping Irrelevant Columns**\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "During the data cleaning phase, the dataset was scrutinized to find out which rows were unimportant and do not impact the prediction of hypertension. To withhold only the features that are paramount to the model training by including only relevant and informative clinical features and remove any redundant or non-informative data is the target.\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Each column was evaluated based on its medical significance, relevance to cardiovascular and hypertensive conditions, and its potential predictive power.\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "All the values were used for the research. Therefore, it is okay to maintain all the clinical features. Later, we can do a feature importance analysis and remove the ones that are not important."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Check for missing values\n",
+    "df.isnull().sum()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# You can notice that there are 25 missing values for sex, so I'll drop rows with missing sex.\n",
+    "df.dropna(subset=['sex'], inplace=True)\n",
+    "df.isnull().sum()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Handling Missing Values in the sex Column**\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "After examining the dataset, it was seen that the sex column had 25 missing values, while all the other features were complete. Since sex is a strategically important feature for hypertension prediction it was a necessity to cope with these missing values before model.\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Two possible strategies were considered:\n",
+    "</p>\n",
+    "\n",
+    "<ul style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.8;\">\n",
+    "  <li>Option 1:  Drop the rows where sex has not been recorded.</li>\n",
+    "  <li>Option 2: Fill the missing values by replacing them with the mode (or most frequent value) of the column.</li>\n",
+    "</ul>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Upon the assessment of both options, it was Option 1 that got the most votes. Since only 25 entries were affected out of a relatively great dataset, dropping them led to a little data loss only. In addition, this approach averted any assumptions or bias since no medical data was biased by arbitrarily assigning gender values.\n",
+    "\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Check for duplicates\n",
+    "df.duplicated().sum()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Checking for Duplicate Records**\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Prior to the modeling process, the data set was carefully checked for duplicate records via the df.duplicated().sum() function. When the same piece of data is stored more than once, it will weaken the model in most cases due to repeat cases or oversights, e.g. in the case of healthcare data, where each patient's case should be different.\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "After running the check, the result indicated zero duplicated rows in the dataset. This means that all entries are unique and no data needed to be removed at this stage.\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Verifying the uniqueness of records ensures that each observation contributes fairly and independently to the learning process.\n",
+    "</p>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Handling Categorical Features**\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "One very important thing to do before starting any machine learning model is to check if all the categorical variables are in a numerical format. Almost all machine learning algorithms are unable to guess text or category labels unless the labels are encoded correctly.</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "In this dataset, categorical features such as sex, cp (chest pain type), that (thalassemia test), restecg (ECG results), and others are already provided in a numerical format. This suggests that encoding has already been applied.\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Since the dataset already uses numeric codes, no additional encoding is required at this stage. \n",
+    "</p>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Outlier Detection and Evaluation**\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "The values are called outliers when they deviate from consecutive values of a feature. Clinical cases (for example, the high level of blood pressure) may constitute such outliers in medical datasets, but at the same time, there could also be entries of errors (e.g., zero cholesterol).\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "It is requisite to visualize the data first and see the boxplots to be able to decide whether to remove the outliers. As a result, this will help us to be able to differentiate the real legitimate limits from the unrealistic or errors of the values.\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Only those outliers that are clearly invalid, such as biologically impossible values, will be considered for removal. All other clinically plausible outliers will be retained to preserve the integrity and diversity of the dataset.\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "This approach ensures that we do not unintentionally discard important patterns that could contribute to more accurate and realistic model training.\n",
+    "</p>\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Checking for continuous features\n",
+    "# Define numeric columns to check for outliers\n",
+    "numeric_cols = ['age', 'trestbps', 'chol', 'thalach', 'oldpeak']\n",
+    "\n",
+    "# Generate boxplots for each column\n",
+    "for col in numeric_cols:\n",
+    "    plt.figure(figsize=(6, 3))\n",
+    "    sns.boxplot(data=df, x=col, color='skyblue')\n",
+    "    plt.title(f'Boxplot of {col}', fontsize=12)\n",
+    "    plt.xlabel(col, fontsize=10)\n",
+    "    plt.tight_layout()\n",
+    "    plt.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Checking for binary and categorical values\n",
+    "\n",
+    "df['sex'].value_counts()\n",
+    "df['fbs'].value_counts()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Outlier Review Summary\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Even though I got outliers, there were no obvious severe or questionable anomalies which I would have detected by removing them. Only a few measurements were at the extreme top or bottom, and they were still accepted as reasonable because they were illustrative of possible real-life hypertension cases.\n",
+    "</p>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "As a result of this process, none of the data points were excluded at the stage of outlier detection, thus, all the records have been stored with the aim of maintaining the consistency and variability of the data.\n",
+    "</p>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">3.4 Explarotary Data Analysis</h3>\n",
+    "</center>\n",
+    "\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n",
+    "\n",
+    "\n",
+    "\n",
+    "<a id=\"eda\"></a>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Univariate Analysis:**"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Countplot for target (positive/negative)\n",
+    "\n",
+    "sns.countplot(x='target', data=df)\n",
+    "plt.title('Target Class Distribution')\n",
+    "plt.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Histogram\n",
+    "\n",
+    "df['age'].hist(bins=30)\n",
+    "plt.title('Age Distribution')\n",
+    "plt.xlabel('Age')\n",
+    "plt.ylabel('Count')\n",
+    "plt.show()\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Class Balance Observation\n",
+    "\n",
+    "During the univariate analysis, we did a study of the distribution of the target variable between hypertensive (1) and non-hypertensive (0) cases. The outcome was that this dataset is more or less evenly distributed, and that each class has more or less the same number of samples in it. \n",
+    "\n",
+    "This is a relevant finding as an unbalanced class can negatively affect the training of a model, consequently, leading to biased predictions mainly in medical datasets where minority classes are known to be underrepresented. In case no significant class imbalances are identified, there is no necessity to apply rules of oversampling or undersampling techniques (e.g., SMOTE or random sampling). This enables the classification models to be taught by the data with no distortion due to balancing with the artificial generated data."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Bivariate Analysis:**"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# barplot\n",
+    "\n",
+    "sns.barplot(x='sex', y='target', data=df)\n",
+    "plt.title('Sex vs Hypertension Class')\n",
+    "plt.show()\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.figure(figsize=(14, 14))\n",
+    "sns.heatmap(df.corr(), annot=True, cmap='coolwarm')\n",
+    "plt.title('Correlation Heatmap')\n",
+    "plt.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Feature vs target boxplot\n",
+    "\n",
+    "sns.boxplot(x='target', y='age', data=df)\n",
+    "plt.title('Age vs Hypertension Target')\n",
+    "plt.show()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Why These Visualizations Were Chosen\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Upon analyzing the hypertension dataset, several visualizations were chosen by their nature of features concerning categorical vs. continuous and analysis type (univariate vs. bivariate). The main intention here was to identify regularities, relationships, and almost trivial cases that may alter the model performance.\n",
+    "</p>\n",
+    "\n",
+    "<ul style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px;\">\n",
+    "  <li>Countplots were used to visualize the distribution of categorical variables such as sex, cp</code>, and target. These help identify class imbalances or dominant categories.</li>\n",
+    "  <li>Histograms were used to observe the distribution of continuous features like age, chol, and thalach. They highlight skewness, central tendency, and clustering.</li>\n",
+    "  <li>Boxplots helped detect potential outliers and compare distributions across classes (e.g., age or chol vs. target).</li>\n",
+    "  <li>Barplots were applied for comparing categorical features with the binary target variable (e.g., cp vs. target), showing mean likelihoods across groups.</li>\n",
+    "  <li>Correlation Heatmap was included to provide an overall view of feature correlations, aiding in feature selection and interpretation.</li>\n",
+    "</ul>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc;\">\n",
+    "These charts were selected for their clarity, relevance to binary classification, and interpretability in a medical data context.\n",
+    "</p>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Key Insights from the Visualizations\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px; line-height: 1.6;\">\n",
+    "Important information about the distribution and connections within the dataset was revealed by exploratory visualizations. The following are the main conclusions:\n",
+    "</p>\n",
+    "\n",
+    "<ul style=\"font-family: Arial, sans-serif; color: #dcdcdc; font-size: 14px;\">\n",
+    "  <li>Target Distribution: A fairly balanced distribution of hypertensive (positive) and non-hypertensive (negative) people was displayed in the countplot.</li>\n",
+    "  <li>Age and Cholesterol: The distribution of both features was skewed to the right, with some high values being kept because they were thought to be clinically plausible.</li>\n",
+    "  <li>Type of Chest Pain: There may be a connection between hypertension and the higher frequency of some types of chest pain (such as type 3, which is asymptomatic).</li>\n",
+    "  <li>Oldpeak and resting blood pressure varied by target class, with hypertensive patients typically having higher readings.</li>\n",
+    "  <li>The majority of features displayed weak to moderate correlation with the target, according to the correlation heatmap, suggesting that the model will require the combination of several features in order to classify data accurately.</li>\n",
+    "</ul>\n",
+    "\n",
+    "<p style=\"font-family: Arial, sans-serif; color: #dcdcdc;\">\n",
+    "Overall, the EDA confirmed that the dataset is rich in clinically relevant features, with no major issues of imbalance or noise that would require additional preprocessing.\n",
+    "</p>\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">3.5 Feature Engineering And Scaling</h3>\n",
+    "</center>\n",
+    "\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n",
+    "\n",
+    "\n",
+    "Feature selection was not used in this project. A small number of distinct clinical and demographic characteristics are already present in the dataset, the majority of which may be pertinent to the prediction of hypertension. Eliminating any of these could result in the loss of important data. \n",
+    "\n",
+    "Using more selection methods would not significantly improve model performance because the feature set is already condensed and interpretable."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Scaling\n",
+    "\n",
+    "from sklearn.preprocessing import StandardScaler\n",
+    "\n",
+    "# Initialize scaler and apply it on the training and testing data\n",
+    "scaler = StandardScaler()\n",
+    "X_train = scaler.fit_transform(X_train)\n",
+    "X_test = scaler.transform(X_test)\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Feature scaling was applied using StandardScaler to normalize the input features. This ensures that all features contribute equally to the learning process, especially for algorithms sensitive to feature magnitude such as KNN and SVM."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<a id=\"model-building\"></a>\n",
+    "\n",
+    "\n",
+    "---\n",
+    "\n",
+    "<center><h2>4.0 Model Building</h2></center>\n",
+    "\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">4.1 Train Test-Split</h3>\n",
+    "</center>\n",
+    "\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.model_selection import train_test_split\n",
+    "\n",
+    "# Split features and target\n",
+    "X = df.drop('target', axis=1)\n",
+    "y = df['target']\n",
+    "\n",
+    "# Perform train-test split\n",
+    "X_train, X_test, y_train, y_test = train_test_split(\n",
+    "    X, y, test_size=0.2, random_state=42)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Note why I chose this split  "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\n",
+    "\n",
+    "# scaler = StandardScaler()\n",
+    "# X_train_scaled = scaler.fit_transform(X_train)\n",
+    "# X_test_scaled = scaler.transform(X_test)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">4.2 Baseline Model</h3>\n",
+    "</center>\n",
+    "\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Logistic Regression - Model Creation and Training\n",
+    "\n",
+    "from sklearn.linear_model import LogisticRegression\n",
+    "\n",
+    "# Train baseline model with increased iteration limit\n",
+    "baseline_model = LogisticRegression(max_iter=1000)\n",
+    "baseline_model.fit(X_train, y_train)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">4.3 Multiple Classifier Training</h3>\n",
+    "</center>\n",
+    "\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# SVM Model - Creation and Training\n",
+    "\n",
+    "from sklearn.svm import SVC\n",
+    "\n",
+    "# Initialize the SVM classifier (RBF kernel is default)\n",
+    "svm_model = SVC(kernel='rbf', random_state=42)\n",
+    "\n",
+    "# Train the model\n",
+    "svm_model.fit(X_train, y_train)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# KNN Model - Creation and Training\n",
+    "\n",
+    "from sklearn.neighbors import KNeighborsClassifier\n",
+    "\n",
+    "# Initialize and train the KNN model\n",
+    "knn_model = KNeighborsClassifier(n_neighbors=5)  # You can tune this later\n",
+    "knn_model.fit(X_train, y_train)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for k in range(1, 11):\n",
+    "    knn = KNeighborsClassifier(n_neighbors=k)\n",
+    "    knn.fit(X_train, y_train)\n",
+    "    y_pred = knn.predict(X_test)\n",
+    "    print(f\"K={k} | Accuracy: {accuracy_score(y_test, y_pred):.2f}\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Random Forest - Model Training\n",
+    "\n",
+    "from sklearn.ensemble import RandomForestClassifier\n",
+    "\n",
+    "# Initialize and train Random Forest\n",
+    "rf_model = RandomForestClassifier(n_estimators=100, random_state=42)\n",
+    "rf_model.fit(X_train, y_train)\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Naive Bayes - Model Training\n",
+    "\n",
+    "from sklearn.naive_bayes import GaussianNB\n",
+    "\n",
+    "# Initialize and train the model\n",
+    "nb_model = GaussianNB()\n",
+    "nb_model.fit(X_train, y_train)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<a id=\"model-evaluation\"></a>\n",
+    "\n",
+    "---\n",
+    "\n",
+    "<center><h2>5.0 Models Evaluation</h2></center>\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">5.1 Evaluation Metrics</h3>\n",
+    "</center>\n",
+    "\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Logistic Regression - Prediction and Evaluation\n",
+    "\n",
+    "from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report\n",
+    "\n",
+    "# Predict on test data\n",
+    "y_pred_baseline = baseline_model.predict(X_test)\n",
+    "\n",
+    "# Evaluate baseline performance\n",
+    "print(\"Baseline Model Performance (Logistic Regression):\")\n",
+    "print(\"Accuracy:\", accuracy_score(y_test, y_pred_baseline))\n",
+    "print(\"Precision:\", precision_score(y_test, y_pred_baseline))\n",
+    "print(\"Recall:\", recall_score(y_test, y_pred_baseline))\n",
+    "print(\"F1 Score:\", f1_score(y_test, y_pred_baseline))\n",
+    "print(\"\\n\")\n",
+    "print(classification_report(y_test, y_pred_baseline))\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# SVM Model - Prediction and Evaluation\n",
+    "\n",
+    "from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report\n",
+    "\n",
+    "# Predict on test set\n",
+    "y_pred_svm = svm_model.predict(X_test)\n",
+    "\n",
+    "# Evaluate the model\n",
+    "print(\"SVM Model Performance:\")\n",
+    "print(\"Accuracy:\", accuracy_score(y_test, y_pred_svm))\n",
+    "print(\"Precision:\", precision_score(y_test, y_pred_svm))\n",
+    "print(\"Recall:\", recall_score(y_test, y_pred_svm))\n",
+    "print(\"F1 Score:\", f1_score(y_test, y_pred_svm))\n",
+    "print(\"\\n\")\n",
+    "print(classification_report(y_test, y_pred_svm))\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# KNN Model - Prediction and Evaluation\n",
+    "\n",
+    "from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report\n",
+    "\n",
+    "# Predict on the test set\n",
+    "y_pred_knn = knn_model.predict(X_test)\n",
+    "\n",
+    "# Evaluate KNN performance\n",
+    "print(\"K-Nearest Neighbors Model Performance:\")\n",
+    "print(\"Accuracy:\", accuracy_score(y_test, y_pred_knn))\n",
+    "print(\"Precision:\", precision_score(y_test, y_pred_knn))\n",
+    "print(\"Recall:\", recall_score(y_test, y_pred_knn))\n",
+    "print(\"F1 Score:\", f1_score(y_test, y_pred_knn))\n",
+    "print(\"\\n\")\n",
+    "print(classification_report(y_test, y_pred_knn))\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.model_selection import cross_val_score\n",
+    "from sklearn.neighbors import KNeighborsClassifier\n",
+    "import numpy as np\n",
+    "\n",
+    "# Rerun with shuffled dataset (only for validation)\n",
+    "cv_scores = cross_val_score(KNeighborsClassifier(n_neighbors=5), X, y, cv=5)\n",
+    "print(\"CV Scores:\", cv_scores)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(X_test.shape[0])\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for k in range(1, 11):\n",
+    "    knn = KNeighborsClassifier(n_neighbors=k)\n",
+    "    knn.fit(X_train, y_train)\n",
+    "    y_pred = knn.predict(X_test)\n",
+    "    print(f\"K={k} | Accuracy: {accuracy_score(y_test, y_pred):.2f}\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay\n",
+    "\n",
+    "cm = confusion_matrix(y_test, y_pred_knn)\n",
+    "disp = ConfusionMatrixDisplay(confusion_matrix=cm)\n",
+    "disp.plot()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "KNN Performance Stability with Cross-Validation:\n",
+    "\n",
+    "The K-Nearest Neighbors model was first performing almost perfectly on the test set. This made me wonder if it was overfitting. To check if it was stable, I did 5-fold cross-validation.\n",
+    "\n",
+    "Cross-validation scores did not deviate at all between 98.3% and 99.9%. Consistent scores confirm that the model does a great job across multiple sections of data. This rules out that first high score happening due to overfitting. Instead, this confirms the efficiency of the model to predict output for this set of data."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Evaluating KNN with Confusion Matrix and Varying K Values:\n",
+    "\n",
+    "To better understand the performance and stability of the K-Nearest Neighbors (KNN) classifier, we evaluated the model in two ways: testing across a range of K values and analyzing the confusion matrix.\n",
+    "\n",
+    "\n",
+    "\n",
+    "Then, we tested KNN on different values of K (1 to 10) to see how performance would vary when the size of the neighborhood changed. The model consistently performed well with high accuracy (greater than 99%) for all values tested, which shows that the model is not too sensitive to the choice of K for this dataset.\n",
+    "\n",
+    "\n",
+    "\n",
+    "To further validate the performance of the model, a confusion matrix was plotted. This gave us a clearer idea of how the classifier performed in terms of true positives, false positives, true negatives, and false negatives. The matrix showed that the model made hardly any mistakes only a few false positives and false negatives out of over 5000 instances reassuring us that the KNN model was highly specific and highly sensitive.\n",
+    "\n",
+    "\n",
+    "\n",
+    "Together, these procedures helped to validate that the model generalizes and does not just memorize patterns in training data. This further validates our confidence in KNN's accuracy for this classification problem.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Random Forest - Model Evaluation\n",
+    "\n",
+    "from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report\n",
+    "\n",
+    "# Predict on test set\n",
+    "y_pred_rf = rf_model.predict(X_test)\n",
+    "\n",
+    "# Evaluate performance\n",
+    "print(\"Random Forest Model Performance:\")\n",
+    "print(\"Accuracy:\", accuracy_score(y_test, y_pred_rf))\n",
+    "print(\"Precision:\", precision_score(y_test, y_pred_rf))\n",
+    "print(\"Recall:\", recall_score(y_test, y_pred_rf))\n",
+    "print(\"F1 Score:\", f1_score(y_test, y_pred_rf))\n",
+    "print(\"\\n\")\n",
+    "print(classification_report(y_test, y_pred_rf))\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.ensemble import RandomForestClassifier\n",
+    "from sklearn.model_selection import cross_val_score\n",
+    "\n",
+    "# Load the dataset using the correct path\n",
+    "df = pd.read_csv(\"hypertension_data 2 (1).csv\")\n",
+    "\n",
+    "\n",
+    "# Drop rows with missing values (already cleaned earlier)\n",
+    "df_cleaned = df.dropna()\n",
+    "\n",
+    "# Separate features and target\n",
+    "X = df_cleaned.drop('target', axis=1)\n",
+    "y = df_cleaned['target']\n",
+    "\n",
+    "# Initialize the model\n",
+    "rf_model = RandomForestClassifier(random_state=42)\n",
+    "\n",
+    "# Perform 5-Fold Cross-Validation\n",
+    "cv_scores = cross_val_score(rf_model, X, y, cv=5, scoring='accuracy')\n",
+    "\n",
+    "# Output results\n",
+    "print(\"Random Forest CV Scores:\", cv_scores)\n",
+    "print(\"Average CV Accuracy:\", np.mean(cv_scores))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Feature importance \n",
+    "\n",
+    "rf_model.fit(X, y)\n",
+    "importances = rf_model.feature_importances_\n",
+    "feature_importance = pd.Series(importances, index=X.columns).sort_values(ascending=False)\n",
+    "print(feature_importance)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.model_selection import StratifiedKFold, cross_val_score\n",
+    "\n",
+    "skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)\n",
+    "scores = cross_val_score(RandomForestClassifier(random_state=42), X, y, cv=skf)\n",
+    "print(\"Stratified CV scores:\", scores)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Random Forest Classifier\n",
+    "\n",
+    "Random Forest algorithm was applied to the hypertension dataset for the prediction of an individual being hypertensive or not. The model was trained using the preprocessed data and performed perfectly on the test set with all the significant evaluation metrics — accuracy, precision, recall, and F1 score scoring 1.00.\n",
+    "\n",
+    "To ensure that this was not a one-off or the result of data leakage, we executed stratified 5-fold cross-validation. Cross-validation also produced consistent results across all folds, with each fold yielding an accuracy of 1.00.\n",
+    "\n",
+    "We also executed feature importance analysis on the trained Random Forest model. The top features contributing towards the classification were:\n",
+    "- cp (chest pain type)\n",
+    "- thalach (max heart rate achieved)\n",
+    "- oldpeak (ST depression)\n",
+    "- ca (number of large vessels colored)\n",
+    "\n",
+    "These features align with known clinical markers, enhancing the model's interpretability. However, due to the extremely high and consistent performance, it needs to be noted that further testing on external or real-world datasets is necessary.\n",
+    "\n",
+    "Note: The model is likely overfitting.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Naive Bayes - Model Evaluation\n",
+    "\n",
+    "from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report\n",
+    "\n",
+    "# Predict on test set\n",
+    "y_pred_nb = nb_model.predict(X_test)\n",
+    "\n",
+    "# Evaluate performance\n",
+    "print(\"Naive Bayes Model Performance:\")\n",
+    "print(\"Accuracy:\", accuracy_score(y_test, y_pred_nb))\n",
+    "print(\"Precision:\", precision_score(y_test, y_pred_nb))\n",
+    "print(\"Recall:\", recall_score(y_test, y_pred_nb))\n",
+    "print(\"F1 Score:\", f1_score(y_test, y_pred_nb))\n",
+    "print(\"\\n\")\n",
+    "print(classification_report(y_test, y_pred_nb))\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">5.2 Confusion Matrices</h3>\n",
+    "</center>\n",
+    "\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Logistic regression \n",
+    "\n",
+    "from sklearn.metrics import ConfusionMatrixDisplay\n",
+    "\n",
+    "ConfusionMatrixDisplay.from_estimator(baseline_model, X_test, y_test, cmap='viridis')\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The confusion matrix for Logistic Regression shows a well-balanced classification, with relatively few misclassifications between hypertensive and non-hypertensive individuals.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#SVM\n",
+    "\n",
+    "ConfusionMatrixDisplay.from_estimator(svm_model, X_test, y_test, cmap='viridis')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The SVM confusion matrix shows good performance overall, though with slightly more false negatives than other models, indicating a few hypertensive cases were missed.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#kNN\n",
+    "\n",
+    "ConfusionMatrixDisplay.from_estimator(knn_model, X_test, y_test, cmap='viridis')\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "KNN demonstrates extremely high accuracy, with almost perfect classification. However, such perfection may indicate overfitting and should be interpreted cautiously.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#RF\n",
+    "\n",
+    "ConfusionMatrixDisplay.from_estimator(rf_model, X_test, y_test, cmap='viridis')\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The confusion matrix for Random Forest shows flawless performance on the test set, suggesting very strong predictive capability — though it may also point to overfitting.\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ConfusionMatrixDisplay.from_estimator(nb_model, X_test, y_test, cmap='viridis')\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Naive Bayes achieves reasonable performance, with a slightly higher number of misclassifications compared to tree-based models, yet still maintains strong generalization.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center> \n",
+    "  <h3 style=\"color: lightblue; font-family: 'Trebuchet MS', sans-serif;\">5.3 Model Comparisons</h3>\n",
+    "</center>\n",
+    "\n",
+    "<hr style=\"border: 1px solid lightblue; width: 50%;\">\n",
+    "\n",
+    "Comparison table or comparison summary, compare all metrics side by side and select and note which one can be the best, highlight if there is any presence of overfitting/underfitting, if any occurs, it will be a HUGE bonus to you if you can conquer it or discuss how you can conquer it.\n",
+    "<br>\n",
+    "<br>\n",
+    "Bar plots or radar charts comparing model metrics since they asked for visualizations.\n",
+    "<a id=\"models-comparison\"></a>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Model Performance Comparison\n",
+    "\n",
+    "| Model               | Accuracy | Precision | Recall | F1 Score |\n",
+    "|--------------------|----------|-----------|--------|----------|\n",
+    "| Logistic Regression| 0.856     | 0.839     | 0.917  | 0.876    |\n",
+    "| SVM                | 0.754     | 0.747     | 0.841  | 0.791    |\n",
+    "| K-Nearest Neighbors| 0.997     | 0.998     | 0.997  | 0.997    |\n",
+    "| Random Forest      | 1.000     | 1.000     | 1.000  | 1.000    |\n",
+    "| Naive Bayes        | 0.829     | 0.833     | 0.867  | 0.849    |\n",
+    "\n",
+    "\n",
+    "\n",
+    " Although Random Forest and KNN models achieved near-perfect scores, this might be an indicator of overfitting. Logistic Regression and Naive Bayes offer more realistic and generalizable performance.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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EydOZNWqVSxfvpwvvviCF154gfDwcKytrYudc6fC6CIiIiIiIiLy4FFQSv4noaGhLFmyhLy8PGrUqMGAAQMIDQ2lTp06xjFmsxmz2axglIiIiIiIiIgYVFNK/icdO3akRo0adO7cGR8fH2N7QUGBUfz89iLoIiIiIiIiIiKgTCn5k+Xl5WFhYaEglIiIiIiIiIj8IgWl5H+m6XkiIiIiIiIi8nspKCUiIiIiIiIiIqVOqS0iIiIiIiIiIlLqFJQSEREREREREZFSp6CUiIiIiIiIiIiUOgWlRERERERERESk1CkoJSIiIiIiIiIipU5BKRERERERERERKXUKSomIiIj8Re3evRuTycT169d/8zlOTk785z//uWttEhEREfmtFJQSERERuUsGDBiAyWTi+eefL7EvNDQUk8nEgAEDSr9hIiIiIvcBBaVERERE7qK6deuyevVqbty4YWy7efMmq1atol69evewZSIiIiL3loJSIiIiIneRj48P9erVY/369ca29evXU7duXR599FFjW05ODmFhYVSrVo1y5crRvHlzDh48WOxaW7duxd3dHRsbG9q0acOZM2dK3C8uLo6WLVtiY2ND3bp1CQsLIysr62fb99prr1GvXj3Kli1LrVq1CAsL+987LSIiIvIbKCglIiIicpcNHDiQpUuXGj+/9957DBo0qNgxL7/8MuvWrWPZsmV88cUXuLm5ERQURFpaGgDnz5+ne/fudOzYkcOHDxMSEsKECROKXSMpKYmgoCC6d+9OYmIiH330ETExMYwcOfKO7fr444+JiIhg4cKFpKamsnHjRry9vf/k3ouIiIjcmYJSIiIiInfZs88+S0xMDGfOnOHs2bPExsbyzDPPGPuzsrKYP38+4eHhBAcH88gjj7B48WJsbGyIjIwEYP78+bi4uBAREcHDDz9Mv379StSjCg8Pp2/fvowePZqHHnqIZs2aMWvWLJYvX87NmzdLtOvcuXPUqFGDdu3aUa9ePfz8/BgyZMhd/V2IiIiIFFFQSkREROQuq1KlCp06dWLZsmUsXbqUTp06UaVKFWP/yZMnyc3NJTAw0NhmZWWFn58fycnJACQnJxMQEIDJZDKOadq0abH7JCQk8P7772Nra2v8CQoKoqCggNOnT5doV69evbhx4wYuLi4MGTKEDRs2kJeX92d3X0REROSOLO91A0REREQeBIMGDTKm0c2dO7fYPrPZDFAs4FS0vWhb0TG/pKCggGHDht2xLtSdiqrXrVuX48ePs2PHDnbu3EloaCjh4eHs2bMHKyur39YxERERkT9ImVIiIiIipaBDhw7cunWLW7duERQUVGyfm5sb1tbWxMTEGNtyc3M5dOgQHh4eADzyyCPs37+/2Hk//dnHx4djx47h5uZW4o+1tfUd22VjY0PXrl2ZNWsWu3fvZt++fSQlJf0ZXRYRERH5RcqUEhERESkFFhYWxlQ8CwuLYvsqVKjA8OHDeemll3BwcKBevXq88847ZGdnM3jwYACef/55/v3vfzN27FiGDRtmTNW73fjx4wkICGDEiBEMGTKEChUqkJyczI4dO5g9e3aJNr3//vvk5+fj7+9P+fLlWbFiBTY2NtSvX//u/BJEREREbqNMKREREZFSYmdnh52d3R33TZ8+nR49evDss8/i4+PDiRMn2L59O5UrVwYKp9+tW7eOTz/9lEaNGrFgwQKmTZtW7BoNGzZkz549pKam0qJFCx599FFeffVVatasecd7VqpUicWLFxMYGEjDhg3ZtWsXn376KY6Ojn9ux0VERETuwGT+LQUKRERERERERERE/kTKlBIRERERERERkVKnoJSIiIiIiIiIiJQ6BaVERERERERERKTUKSglIiIiIiIiIiKlTkEpEREREREREREpdQpKiYiIiIiIiIhIqVNQSkRERERERERESp2CUiIiIiIiIiIiUuoUlBIRERERERERkVKnoJSIiIiIiIiIiJQ6BaVERERERERERKTUKSglIiIiIiIiIiKl7v8A7YzLs6lCilwAAAAASUVORK5CYII=",
+      "text/plain": [
+       "<Figure size 1200x600 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "# Comparison BarPlot\n",
+    "\n",
+    "import matplotlib.pyplot as plt\n",
+    "import numpy as np\n",
+    "\n",
+    "models = ['Logistic Regression', 'SVM', 'KNN', 'Random Forest', 'Naive Bayes']\n",
+    "accuracy = [0.856, 0.754, 0.997, 1.0, 0.829]\n",
+    "precision = [0.839, 0.747, 0.998, 1.0, 0.833]\n",
+    "recall = [0.917, 0.841, 0.997, 1.0, 0.867]\n",
+    "f1 = [0.876, 0.791, 0.997, 1.0, 0.849]\n",
+    "\n",
+    "x = np.arange(len(models))\n",
+    "width = 0.2\n",
+    "\n",
+    "plt.figure(figsize=(12, 6))\n",
+    "plt.bar(x - 1.5*width, accuracy, width, label='Accuracy')\n",
+    "plt.bar(x - 0.5*width, precision, width, label='Precision')\n",
+    "plt.bar(x + 0.5*width, recall, width, label='Recall')\n",
+    "plt.bar(x + 1.5*width, f1, width, label='F1 Score')\n",
+    "\n",
+    "plt.xlabel('Models')\n",
+    "plt.ylabel('Scores')\n",
+    "plt.title('Performance Comparison of ML Models')\n",
+    "plt.xticks(x, models, rotation=20)\n",
+    "plt.ylim(0.7, 1.05)\n",
+    "plt.legend()\n",
+    "plt.tight_layout()\n",
+    "plt.show()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Best Performing Model:**  \n",
+    "Random Forest achieved perfect scores across all metrics. However, due to its extremely high performance, there's a strong possibility of overfitting. KNN also performed exceptionally well but may share similar concerns.\n",
+    "\n",
+    "**Weakest Performing Model:**  \n",
+    "SVM had the lowest accuracy, precision, and F1 score among all classifiers, indicating that it was the least effective for this dataset."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center><h3>5.4 Visualizations</h3></center>\n",
+    "\n",
+    "\n",
+    "Accuracy vs Models (you will find plenty of graphs like this in any experiment online it's easy, talk to me if u want one)\n",
+    "\n",
+    "ROC Curves (If the task is binary classification.. as I am not sure since you didn't show me the dataset..) <br>\n",
+    "Feature Importance for every Model <br>\n",
+    "Accuracy Before and After Hypertuning\n",
+    "\n",
+    "<a id=\"visualizations\"></a>\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "<center><h2>6.0 Conclusion</h2></center>\n",
+    "Summary of insights.\n",
+    "\n",
+    "Best performing model (maybe you can also mention the least performing and why).\n",
+    "\n",
+    "Challenges encountered.\n",
+    "\n",
+    "[Put more sections if needed, if you want to put more plots or so or anything]\n",
+    "\n",
+    "---\n",
+    "\n",
+    "<a id=\"conclusion\"></a>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center><h2>7.0 (Optional) GitHub Repository</h2></center>\n",
+    "Link to the repo.\n",
+    "\n",
+    "Mention of README, documentation, and structure.\n",
+    "\n",
+    "Wiki or additional markdown files if added, I am not experienced or know how to do these :( \n",
+    "\n",
+    "You can consider also maybe making an additional PowerPoint presentation from Canva or something to summarize this project?... \n",
+    "\n",
+    "<a id=\"github-repo\"></a>\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "base",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
+
+Add hypertension project notebook
